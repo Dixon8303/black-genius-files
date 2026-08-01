@@ -18,14 +18,20 @@ window.BGF_CONFIG = {
   factSeconds: 10,
   trailerVideoId: "",
   subscriberCount: "",
-  bookStatus: "coming", // "available" | "preorder" | "coming"
+  bookStatus: "available", // "available" | "preorder" | "coming"
   bookUrl: "https://dixon8303.github.io/ImaginariumOzone/book/",
   bnUrl: "",
   kindleUrl: "",
   geniusIndexUrl: "https://dixon8303.github.io/genius-index-booksite/",
   discordUrl: "",
   patreonUrl: "",
-  newsletterAction: ""
+  newsletterAction: "",
+  // Same live Kit (ConvertKit) form the official "What History Buried" site
+  // uses for its "Read Chapter 1 Free" capture — one shared Recovery List,
+  // one incentive email that delivers Chapter 1. Kit's configured success
+  // redirect sends readers to that site's check-your-email.html, which is
+  // the intended cross-link back to the book site.
+  chapterOneFormAction: "https://app.kit.com/forms/9748584/subscriptions"
 };
 /* ========================== end of config block ============================ */
 
@@ -56,7 +62,7 @@ window.BGF_CONFIG = {
     qi: 0, score: 0, streak: 0, best: parseInt(localStorage.getItem("bgf_best") || "0", 10) || 0,
     answered: false, chosen: -1, qShare: "Share my rank ↗",
     subscribed: false,
-    navOpen: false, trailerOpen: false, chOneSent: false,
+    navOpen: false, trailerOpen: false,
     seen: storeGet("bgf_seen", []) || [],
     soundOn: localStorage.getItem("bgf_sound") === "1",
     cipher: storeGet("bgf_cipher", null)
@@ -610,7 +616,7 @@ window.BGF_CONFIG = {
     var bookSt = CFG.bookStatus || "available";
     $("book-stamp").textContent = bookSt === "preorder" ? "PRE-ORDER OPEN" : bookSt === "coming" ? "COMING SOON" : "AVAILABLE NOW";
     var cta = $("book-cta");
-    cta.textContent = (bookSt === "preorder" ? "Pre-order" : "Get the Book") + " — Amazon ↗";
+    cta.textContent = (bookSt === "preorder" ? "Pre-order the Book" : "Get the Book") + " ↗";
     cta.href = CFG.bookUrl || "https://www.amazon.com/s?k=What+History+Buried+D.+Antione+Dixon";
     $("book-retail").style.display = bookSt === "coming" ? "none" : "flex";
     if (CFG.bnUrl) { $("book-bn").href = CFG.bnUrl; $("book-bn").hidden = false; }
@@ -622,13 +628,22 @@ window.BGF_CONFIG = {
     document.querySelectorAll("[data-yt-sub]").forEach(function (a) { a.href = YT.sub; });
     renderChapters();
   }
+  // Matches the official "What History Buried" site's Chapter 1 capture exactly:
+  // a real (non-fetch) form POST to Kit, so Kit's own success redirect takes the
+  // reader to that site's check-your-email.html — the delivery email carries the
+  // Chapter 1 PDF, there is nothing to open client-side.
   $("ch-one-form").addEventListener("submit", function (e) {
     e.preventDefault();
-    var em = (e.target.elements.email || {}).value || "";
-    if (!em.trim()) return;
-    state.chOneSent = true;
-    $("ch-one-form").hidden = true; $("ch-one-sent").hidden = false;
-    window.open("assets/whb-4-chapter-sample.pdf", "_blank", "noopener");
+    var input = e.target.elements.email_address;
+    var email = input ? input.value.trim() : "";
+    var action = (CFG.chapterOneFormAction || "").trim();
+    if (!action) { alert("Signup opens soon — the Recovery List isn't connected yet."); return; }
+    if (!email || email.indexOf("@") < 1) { if (input) input.focus(); return; }
+    var f = document.createElement("form");
+    f.method = "post"; f.action = action; f.style.display = "none";
+    var em = document.createElement("input"); em.name = "email_address"; em.value = email;
+    f.appendChild(em);
+    document.body.appendChild(f); f.submit();
   });
 
   // ---------------------------------------------------------------- Codex / cipher

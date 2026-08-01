@@ -21,7 +21,7 @@ The `.dc.html` design file and its `support.js` prototyping-tool runtime are
 | `index.html` | The whole site — one page, all sections, anchors kept stable (`#files`, `#timeline`, `#book`, `#dossiers`, `#trials`, `#evidence`, `#subscribe`, …) |
 | `assets/data.js` | Content: episodes seed list, the 20 genius dossiers, timeline, trivia pool, daily ciphers, book chapters, declassified facts. Edit content here. |
 | `assets/app.js` | Behavior: sync, search/filter, quizzes, modals, persistence, sharing, printing. **Config block at the very top of the file** — edit that, not the code below it. |
-| `assets/` (images, PDF) | Dossier portraits, author headshot, book covers, OG card, the free 4-chapter sample PDF. |
+| `assets/` (images) | Dossier portraits, author headshot, book covers, OG card. |
 
 ## Config
 
@@ -33,10 +33,12 @@ of [`assets/app.js`](assets/app.js):
 | `youtubeApiKey` | ⚠️ Carried over from the previous live version of this site (already public). **Rotate this key in Google Cloud Console and add an HTTP-referrer restriction** limiting it to this site's origin before treating it as production-safe — an unrestricted key can be used by anyone who reads this file. Leave blank to fall back to the no-key RSS sync path automatically. |
 | `liveSync` | `true` — polls YouTube every 10 min + on tab refocus |
 | `showCountdown` | `true` — the "next file in…" widget under the hero |
+| `bookStatus` | `"available"` — the book is purchasable now (Payhip + Amazon), matching the official site |
 | `bookUrl` | Points at the official *What History Buried* site (`site/` in the main `ImaginariumOzone` repo), which has the full buy flow (Payhip/Amazon), free chapter, and evidence room |
 | `geniusIndexUrl` | Cross-promo link to *The Genius Index* book site |
-| `discordUrl` / `patreonUrl` | Empty = the Reading Room shows "DOOR SEALED — OPENING SOON" |
-| `newsletterAction` | Empty = the Inner Circle signup form is front-end only (no POST) |
+| `chapterOneFormAction` | The **same live Kit (ConvertKit) form** the official book site uses for "Read Chapter 1 Free" — one shared Recovery List, one incentive email. The "Send Chapter 1" form here does a real (non-fetch) POST to it, exactly like `site/assets/whb.js`'s `subscribe()`, so Kit's configured success redirect lands the reader on the book site's `check-your-email.html` — this is an intentional cross-link back to that site, not a bug. |
+| `discordUrl` / `patreonUrl` | Empty = the Reading Room shows "DOOR SEALED — OPENING SOON" (real state, not a missing link — set these once the Discord/Patreon exist) |
+| `newsletterAction` | Empty = the *Inner Circle* signup form (bottom of page, a separate list from the Chapter 1 capture) is front-end only (no POST) until a real endpoint is set |
 
 ## Sync & fallback chain
 
