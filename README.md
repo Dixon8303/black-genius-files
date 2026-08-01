@@ -30,7 +30,7 @@ of [`assets/app.js`](assets/app.js):
 
 | Key | Status |
 |---|---|
-| `youtubeApiKey` | ✅ Restricted in Google Cloud Console to this site's origin (HTTP referrer restriction). Still visible client-side (unavoidable for a static site calling a browser-facing API), but it can't be used from anywhere except this domain. If the site moves to a new domain, add that origin to the key's restrictions too. Leave blank to fall back to the no-key RSS sync path automatically. |
+| `youtubeApiKey` | ✅ Restricted in Google Cloud Console two ways: HTTP-referrer restriction (this site's origin only) and API restriction (YouTube Data API v3 only). Still visible client-side (unavoidable for a static site calling a browser-facing API), but it can't be used from another site or against another Google API. If the site moves to a new domain, add that origin to the key's restrictions too. Leave blank to fall back to the no-key RSS sync path automatically. |
 | `liveSync` | `true` — polls YouTube every 10 min + on tab refocus |
 | `showCountdown` | `true` — the "next file in…" widget under the hero |
 | `bookStatus` | `"available"` — the book is purchasable now (Payhip + Amazon), matching the official site |

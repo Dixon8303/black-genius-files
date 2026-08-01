@@ -4,13 +4,14 @@
    in assets/data.js.
 
    SECURITY NOTE: youtubeApiKey below is a client-visible YouTube Data API v3
-   key. It's restricted in Google Cloud Console to this site's origin
-   (HTTP referrer restriction under Application restrictions), so it can't be
-   used from other websites even though the value itself is visible in this
-   file. If the site ever moves to a new domain, add that origin under the
-   key's restrictions too, or the live sync will start failing referrer
-   checks. Leaving this blank makes the site fall back to the no-key RSS
-   sync path automatically.
+   key, restricted in Google Cloud Console two ways: an HTTP-referrer
+   restriction limiting it to this site's origin, and an API restriction
+   limiting it to YouTube Data API v3 only. So even though the value is
+   visible in this file, it can't be used from other websites or against
+   other Google APIs. If the site ever moves to a new domain, add that
+   origin under the key's restrictions too, or the live sync will start
+   failing referrer checks. Leaving this blank makes the site fall back to
+   the no-key RSS sync path automatically.
    ============================================================================ */
 window.BGF_CONFIG = {
   youtubeApiKey: "AIzaSyApoG7-xvqvNJ-TLbXt7mYq3dzQadhZX48",
