@@ -30,7 +30,7 @@ of [`assets/app.js`](assets/app.js):
 
 | Key | Status |
 |---|---|
-| `youtubeApiKey` | ⚠️ Carried over from the previous live version of this site (already public). **Rotate this key in Google Cloud Console and add an HTTP-referrer restriction** limiting it to this site's origin before treating it as production-safe — an unrestricted key can be used by anyone who reads this file. Leave blank to fall back to the no-key RSS sync path automatically. |
+| `youtubeApiKey` | ✅ Restricted in Google Cloud Console to this site's origin (HTTP referrer restriction). Still visible client-side (unavoidable for a static site calling a browser-facing API), but it can't be used from anywhere except this domain. If the site moves to a new domain, add that origin to the key's restrictions too. Leave blank to fall back to the no-key RSS sync path automatically. |
 | `liveSync` | `true` — polls YouTube every 10 min + on tab refocus |
 | `showCountdown` | `true` — the "next file in…" widget under the hero |
 | `bookStatus` | `"available"` — the book is purchasable now (Payhip + Amazon), matching the official site |
