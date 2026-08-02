@@ -53,7 +53,11 @@ window.BGF_CONFIG = {
   // (ImaginariumOzone/site/assets/site.js), so both report together and a
   // visitor's traffic source survives a click between the two sites. See
   // assets/analytics.js for the loader + cross-site UTM passthrough.
-  gaMeasurementId: "G-FXDJLKSKDG"
+  gaMeasurementId: "G-FXDJLKSKDG",
+  // Same show as the book site's PODCAST_URL (site/assets/site.js) — one
+  // Apple Podcasts URL drives both the "Listen" link and the embedded
+  // player (embed src is derived by swapping in embed.podcasts.apple.com).
+  podcastUrl: "https://podcasts.apple.com/us/podcast/the-all-black-everything-podcast/id1527013923"
 };
 /* ========================== end of config block ============================ */
 
@@ -813,6 +817,18 @@ window.BGF_CONFIG = {
     $("door-patreon").innerHTML = doorHtml((CFG.patreonUrl || "").trim(), "Claim a desk ↗");
   }
 
+  // ---------------------------------------------------------------- Podcast
+  function renderPodcast() {
+    var url = (CFG.podcastUrl || "").trim();
+    if (!url) return;
+    $("podcast-link").href = url;
+    try {
+      var u = new URL(url);
+      if (u.hostname === "podcasts.apple.com") u.hostname = "embed.podcasts.apple.com";
+      $("podcast-embed").src = u.toString();
+    } catch (e) {}
+  }
+
   // ---------------------------------------------------------------- Newsletter
   $("subscribe-form").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -893,6 +909,7 @@ window.BGF_CONFIG = {
       '<ul style="list-style:none;display:flex;flex-direction:column;gap:9px;margin:0 0 20px;padding:0">' + achHtml + '</ul>' +
       '<div style="margin:0 0 16px;padding-top:14px;border-top:1px dashed rgba(201,168,76,.22)"><div style="font-family:\'Special Elite\',monospace;font-size:10px;letter-spacing:2px;color:#c9a84c;margin-bottom:9px">TRACE THIS GENIUS</div>' +
         '<div style="display:flex;gap:9px;flex-wrap:wrap"><a href="' + YT.url + '/search?query=' + encodeURIComponent(mf.name) + '" target="_blank" rel="noopener noreferrer" class="hv-outline" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;color:#c4c9d0;border:1px solid rgba(201,168,76,.28);padding:8px 15px;border-radius:999px;transition:border-color .2s,color .2s">▶ Their file on YouTube ↗</a>' +
+        '<a href="https://catalog.archives.gov/search?q=' + encodeURIComponent(mf.name) + '" target="_blank" rel="noopener noreferrer" class="hv-outline" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;color:#c4c9d0;border:1px solid rgba(201,168,76,.28);padding:8px 15px;border-radius:999px;transition:border-color .2s,color .2s">⌕ Search Primary Sources ↗</a>' +
         '<button data-open-lineage="' + esc(mf.arch) + '" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;color:#c4c9d0;border:1px solid rgba(201,168,76,.28);padding:8px 15px;border-radius:999px;background:none;cursor:pointer;font-family:\'Work Sans\',sans-serif;transition:border-color .2s,color .2s" class="hv-outline">◆ All ' + esc(mf.arch) + 's</button>' + relTlBtn + '</div></div>' +
       '<div style="display:flex;gap:10px;flex-wrap:wrap"><a href="' + esc(mf.learn) + '" target="_blank" rel="noopener noreferrer" class="hv-fill" style="display:inline-flex;align-items:center;gap:8px;color:#e8c070;font-weight:700;font-size:14px;border:1px solid rgba(201,168,76,.35);padding:10px 18px;border-radius:999px;transition:background .2s,color .2s">Open Full Record ↗</a>' +
         '<button data-share-modal style="display:inline-flex;align-items:center;gap:8px;color:#e8c070;font-weight:700;font-size:14px;border:1px solid rgba(201,168,76,.35);padding:10px 18px;border-radius:999px;background:none;cursor:pointer;font-family:\'Work Sans\',sans-serif;transition:background .2s,color .2s" class="hv-fill">' + esc(state.mShare) + '</button>' +
@@ -1103,6 +1120,7 @@ window.BGF_CONFIG = {
     renderQuiz();
     renderSealedLetter();
     renderDoors();
+    renderPodcast();
     $("footer-year").textContent = new Date().getFullYear();
     tick(); setInterval(tick, 1000);
     scheduleTicker();
