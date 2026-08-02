@@ -35,6 +35,11 @@ window.BGF_CONFIG = {
   bnUrl: "",
   kindleUrl: "",
   geniusIndexUrl: "https://dixon8303.github.io/genius-index-booksite/",
+  // The Genius Index's own interactive online assessment (separate repo).
+  // Kept as the direct dixon8303.github.io URL, not the tinyurl alias, so
+  // it still matches OUTBOUND_HOST in assets/analytics.js and picks up the
+  // same cross-site UTM passthrough as geniusIndexUrl/whbSiteUrl above.
+  assessmentUrl: "https://dixon8303.github.io/ImaginariumOzone/",
   discordUrl: "",
   patreonUrl: "",
   newsletterAction: "",
@@ -642,6 +647,7 @@ window.BGF_CONFIG = {
     if (CFG.kindleUrl) { $("book-kindle").href = CFG.kindleUrl; $("book-kindle").hidden = false; }
     var gi = CFG.geniusIndexUrl;
     $("gi-cover-link").href = gi; $("gi-visit-link").href = gi; $("custodian-gi-link").href = gi; $("footer-gi-link").href = gi;
+    $("gi-assessment-link").href = CFG.assessmentUrl;
     $("book-cover-link").href = CFG.bookUrl;
     $("footer-yt-link").href = YT.url;
     document.querySelectorAll("[data-yt-sub]").forEach(function (a) { a.href = YT.sub; });
