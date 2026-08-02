@@ -420,12 +420,23 @@ button{font:inherit}
     <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,4.4vw,46px);font-weight:800;line-height:1.1;margin:10px 0 12px;color:#e8c070;background:linear-gradient(92deg,#fafbfc 8%,#e8c070 55%,#c9a84c 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">The All Black Everything Podcast</h2>
     <p style="font-family:'Crimson Pro',Georgia,serif;font-size:17px;color:#bfc4cb;line-height:1.65;margin:0;text-wrap:pretty">The files, argued out loud. Same evidence standard, longer conversation — heard in 22+ countries.</p>
   </div>
-  <div style="max-width:760px;background:linear-gradient(165deg,#121316,#000000);border:1px solid rgba(201,168,76,.25);border-radius:20px;padding:clamp(16px,3vw,22px);box-shadow:0 24px 60px rgba(0,0,0,.5)">
-    <div style="border-radius:12px;overflow:hidden;background:#000">
-      <iframe id="podcast-embed" src="" title="The All Black Everything Podcast" allow="autoplay *; encrypted-media *; clipboard-write" style="width:100%;height:450px;border:0;display:block" loading="lazy"></iframe>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:stretch">
+    <div style="flex:1 1 500px;max-width:760px;background:linear-gradient(165deg,#121316,#000000);border:1px solid rgba(201,168,76,.25);border-radius:20px;padding:clamp(16px,3vw,22px);box-shadow:0 24px 60px rgba(0,0,0,.5)">
+      <div style="border-radius:12px;overflow:hidden;background:#000">
+        <iframe id="podcast-embed" src="" title="The All Black Everything Podcast" allow="autoplay *; encrypted-media *; clipboard-write" style="width:100%;height:450px;border:0;display:block" loading="lazy"></iframe>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:14px">
+        <a href="#" id="podcast-link" target="_blank" rel="noopener noreferrer" class="hv-outline" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#c4c9d0;border:1px solid rgba(201,168,76,.28);padding:8px 15px;border-radius:999px;transition:border-color .2s,color .2s">Listen on Apple Podcasts ↗</a>
+      </div>
     </div>
-    <div style="display:flex;justify-content:flex-end;margin-top:14px">
-      <a href="#" id="podcast-link" target="_blank" rel="noopener noreferrer" class="hv-outline" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#c4c9d0;border:1px solid rgba(201,168,76,.28);padding:8px 15px;border-radius:999px;transition:border-color .2s,color .2s">Listen on Apple Podcasts ↗</a>
+    <div style="flex:1 1 280px;min-width:260px;display:flex;flex-direction:column;background:linear-gradient(165deg,#141519,#000000);border:1px dashed rgba(201,168,76,.4);border-radius:20px;padding:clamp(20px,3vw,26px)">
+      <span style="font-family:'Special Elite',monospace;font-size:11px;letter-spacing:2.5px;color:#c9a84c">◆ HAVE A STORY?</span>
+      <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:22px;color:#fff;font-weight:800;margin:10px 0 8px">Be a Guest on the Podcast</h3>
+      <p style="font-family:'Crimson Pro',Georgia,serif;font-size:14.5px;color:#c4c9d0;line-height:1.6;margin:0 0 20px;flex:1;text-wrap:pretty">We're always looking for voices to argue the files out loud with. Learn what the show is looking for, then book your own interview slot.</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <a href="#" id="podcast-guest-book" data-track="outbound_click" data-track-dest="podcast_guest_booking" target="_blank" rel="noopener noreferrer" class="hv-cta" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:999px;font-weight:700;font-size:14px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(92deg,#e8c070,#9a6a20);color:#141519;box-shadow:0 10px 30px rgba(201,168,76,.28);transition:transform .15s,box-shadow .2s">Book Your Interview ↗</a>
+        <a href="#" id="podcast-guest-about" data-track="outbound_click" data-track-dest="podcast_guest_info" target="_blank" rel="noopener noreferrer" class="hv-gold" style="text-align:center;font-size:13px;color:#c4c9d0">Learn More About the Show ↗</a>
+      </div>
     </div>
   </div>
 </section>
