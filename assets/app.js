@@ -825,6 +825,7 @@ window.BGF_CONFIG = {
     try {
       var u = new URL(url);
       if (u.hostname === "podcasts.apple.com") u.hostname = "embed.podcasts.apple.com";
+      u.searchParams.set("theme", "dark"); // force dark, independent of visitor OS setting — matches site theme
       $("podcast-embed").src = u.toString();
     } catch (e) {}
   }
