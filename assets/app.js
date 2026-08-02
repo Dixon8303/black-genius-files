@@ -21,7 +21,17 @@ window.BGF_CONFIG = {
   trailerVideoId: "",
   subscriberCount: "",
   bookStatus: "available", // "available" | "preorder" | "coming"
-  bookUrl: "https://dixon8303.github.io/ImaginariumOzone/book/",
+  // Same Payhip product ("exquo") the official What History Buried site
+  // sells as its ebook — payhip.js (loaded in index.html's <head>) turns
+  // #book-cta and #book-cover-link into the same checkout overlay used
+  // there; this URL is just the no-JS fallback href.
+  bookUrl: "https://payhip.com/b/exquo",
+  bookPrice: "$14.99", // keep in sync with the Payhip listing
+  // The official book site — has the full buy flow (this same Payhip
+  // listing + Amazon), the free chapter, and the evidence room. Surfaced
+  // as its own "Visit the Official Site" link now that bookUrl above goes
+  // straight to checkout.
+  whbSiteUrl: "https://dixon8303.github.io/ImaginariumOzone/book/",
   bnUrl: "",
   kindleUrl: "",
   geniusIndexUrl: "https://dixon8303.github.io/genius-index-booksite/",
@@ -623,9 +633,11 @@ window.BGF_CONFIG = {
     var bookSt = CFG.bookStatus || "available";
     $("book-stamp").textContent = bookSt === "preorder" ? "PRE-ORDER OPEN" : bookSt === "coming" ? "COMING SOON" : "AVAILABLE NOW";
     var cta = $("book-cta");
-    cta.textContent = (bookSt === "preorder" ? "Pre-order the Book" : "Get the Book") + " ↗";
-    cta.href = CFG.bookUrl || "https://www.amazon.com/s?k=What+History+Buried+D.+Antione+Dixon";
+    var priceSuffix = CFG.bookPrice ? " — " + CFG.bookPrice : "";
+    cta.textContent = (bookSt === "preorder" ? "Pre-order the Book" : "Get the Book") + priceSuffix + " ↗";
+    cta.href = CFG.bookUrl || "https://payhip.com/b/exquo";
     $("book-retail").style.display = bookSt === "coming" ? "none" : "flex";
+    $("book-official-site").href = CFG.whbSiteUrl;
     if (CFG.bnUrl) { $("book-bn").href = CFG.bnUrl; $("book-bn").hidden = false; }
     if (CFG.kindleUrl) { $("book-kindle").href = CFG.kindleUrl; $("book-kindle").hidden = false; }
     var gi = CFG.geniusIndexUrl;

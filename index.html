@@ -50,6 +50,7 @@ input::placeholder{color:#7c828b}
 .hv-play:hover{transform:translate(-50%,-50%) scale(1.14);background:#9e1418;color:#fff}
 button{font:inherit}
 </style>
+<script src="https://payhip.com/payhip.js" defer></script>
 </head>
 <body>
 <div id="bgf-bg" style="position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(1200px 700px at 82% -8%,rgba(130,12,16,.20),transparent 60%),radial-gradient(1000px 620px at 4% 4%,rgba(120,10,14,.16),transparent 55%),radial-gradient(900px 900px at 50% 118%,rgba(80,6,10,.32),transparent 62%)"></div>
@@ -195,7 +196,7 @@ button{font:inherit}
   <span style="position:absolute;top:26px;right:28px;font-family:'Special Elite',monospace;font-size:11px;letter-spacing:2px;color:#c9a84c;border:2px solid rgba(201,168,76,.55);border-radius:6px;padding:3px 11px;transform:rotate(5deg)">EXHIBIT Nº 1</span>
   <div style="max-width:1240px;margin:0 auto;padding:clamp(52px,7vw,88px) 24px clamp(36px,5vw,56px);display:flex;gap:clamp(32px,5vw,64px);align-items:center;flex-wrap:wrap">
     <div style="flex:0 1 320px;min-width:240px;margin:0 auto">
-      <a href="#" id="book-cover-link" data-track="outbound_click" data-track-dest="whb_site" target="_blank" rel="noopener noreferrer" aria-label="Get What History Buried" class="hv-cover" style="display:block;position:relative;transform:rotate(-2deg);transition:transform .25s cubic-bezier(.22,.61,.36,1)">
+      <a href="#" id="book-cover-link" data-payhip data-product="exquo" data-theme="grey" data-track="payhip_click" data-track-dest="ebook" rel="noopener" aria-label="Get What History Buried — digital download" class="hv-cover payhip-buy-button" style="display:block;position:relative;transform:rotate(-2deg);transition:transform .25s cubic-bezier(.22,.61,.36,1)">
         <img src="assets/what-history-buried-cover.jpg" alt="What History Buried — book cover" loading="lazy" style="display:block;width:100%;border-radius:6px;box-shadow:0 34px 80px rgba(0,0,0,.75),0 0 0 1px rgba(201,168,76,.35),0 0 70px rgba(232,192,112,.14)">
       </a>
       <div style="text-align:center;margin-top:18px;font-family:'Special Elite',monospace;font-size:10.5px;letter-spacing:2px;color:#969ba3">VOL. 1 · TWELVE CASE FILES · SOURCE APPENDIX</div>
@@ -209,7 +210,8 @@ button{font:inherit}
       <div id="book-chapters" style="margin:20px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));column-gap:30px;border-top:1px solid rgba(201,168,76,.22)"></div>
       <p style="font-family:'Special Elite',monospace;font-size:10.5px;letter-spacing:1.5px;color:#969ba3;margin:10px 0 0">CHAPTER I IS FREE, SENT BELOW. ELEVEN STAY SEALED UNTIL THE SPINE IS CRACKED.</p>
       <div id="book-retail" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:24px">
-        <a href="#" id="book-cta" data-track="outbound_click" data-track-dest="whb_site" target="_blank" rel="noopener noreferrer" class="hv-cta" style="display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;font-weight:700;font-size:15px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(92deg,#e8c070,#9a6a20);color:#141519;box-shadow:0 10px 30px rgba(201,168,76,.28);transition:transform .15s,box-shadow .2s"></a>
+        <a href="#" id="book-cta" data-payhip data-product="exquo" data-theme="grey" data-track="payhip_click" data-track-dest="ebook" rel="noopener" class="hv-cta payhip-buy-button" style="display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;font-weight:700;font-size:15px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(92deg,#e8c070,#9a6a20);color:#141519;box-shadow:0 10px 30px rgba(201,168,76,.28);transition:transform .15s,box-shadow .2s"></a>
+        <a href="#" id="book-official-site" data-track="outbound_click" data-track-dest="whb_site" target="_blank" rel="noopener noreferrer" class="hv-outline" style="display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:700;font-size:14px;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.32);color:#eef1f4;transition:border-color .2s,color .2s">Visit the Official Site ↗</a>
         <a href="#" id="book-bn" target="_blank" rel="noopener noreferrer" hidden class="hv-outline" style="display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:700;font-size:14px;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.32);color:#eef1f4;transition:border-color .2s,color .2s">Barnes &amp; Noble ↗</a>
         <a href="#" id="book-kindle" target="_blank" rel="noopener noreferrer" hidden class="hv-outline" style="display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:700;font-size:14px;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.32);color:#eef1f4;transition:border-color .2s,color .2s">Kindle ↗</a>
       </div>

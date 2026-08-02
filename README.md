@@ -35,7 +35,8 @@ of [`assets/app.js`](assets/app.js):
 | `liveSync` | `true` — polls YouTube every 10 min + on tab refocus |
 | `showCountdown` | `true` — the "next file in…" widget under the hero |
 | `bookStatus` | `"available"` — the book is purchasable now (Payhip + Amazon), matching the official site |
-| `bookUrl` | Points at the official *What History Buried* site (`site/` in the main `ImaginariumOzone` repo), which has the full buy flow (Payhip/Amazon), free chapter, and evidence room |
+| `bookUrl` / `bookPrice` | The same Payhip ebook listing (`payhip.com/b/exquo`) the official book site sells — `payhip.js` (loaded in `index.html`'s `<head>`) turns `#book-cta` and `#book-cover-link` into the same checkout overlay used there; `bookUrl` is just the no-JS fallback href. Keep `bookPrice` in sync with the actual Payhip listing price. |
+| `whbSiteUrl` | The official *What History Buried* site (`site/` in the main `ImaginariumOzone` repo) — has the full buy flow (this same Payhip listing + Amazon), the free chapter, and the evidence room. Surfaced as its own "Visit the Official Site" button next to the buy button. |
 | `geniusIndexUrl` | Cross-promo link to *The Genius Index* book site |
 | `chapterOneFormAction` | The **same live Kit (ConvertKit) form** the official book site uses for "Read Chapter 1 Free" — one shared Recovery List, one incentive email. The "Send Chapter 1" form here does a real (non-fetch) POST to it, exactly like `site/assets/whb.js`'s `subscribe()`, so Kit's configured success redirect lands the reader on the book site's `check-your-email.html` — this is an intentional cross-link back to that site, not a bug. |
 | `discordUrl` / `patreonUrl` | Empty = the Reading Room shows "DOOR SEALED — OPENING SOON" (real state, not a missing link — set these once the Discord/Patreon exist) |
