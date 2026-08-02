@@ -33,7 +33,12 @@ window.BGF_CONFIG = {
   // one incentive email that delivers Chapter 1. Kit's configured success
   // redirect sends readers to that site's check-your-email.html, which is
   // the intended cross-link back to the book site.
-  chapterOneFormAction: "https://app.kit.com/forms/9748584/subscriptions"
+  chapterOneFormAction: "https://app.kit.com/forms/9748584/subscriptions",
+  // Same GA4 property as the "What History Buried" book site
+  // (ImaginariumOzone/site/assets/site.js), so both report together and a
+  // visitor's traffic source survives a click between the two sites. See
+  // assets/analytics.js for the loader + cross-site UTM passthrough.
+  gaMeasurementId: "G-FXDJLKSKDG"
 };
 /* ========================== end of config block ============================ */
 

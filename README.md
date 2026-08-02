@@ -21,6 +21,7 @@ The `.dc.html` design file and its `support.js` prototyping-tool runtime are
 | `index.html` | The whole site — one page, all sections, anchors kept stable (`#files`, `#timeline`, `#book`, `#dossiers`, `#trials`, `#evidence`, `#subscribe`, …) |
 | `assets/data.js` | Content: episodes seed list, the 20 genius dossiers, timeline, trivia pool, daily ciphers, book chapters, declassified facts. Edit content here. |
 | `assets/app.js` | Behavior: sync, search/filter, quizzes, modals, persistence, sharing, printing. **Config block at the very top of the file** — edit that, not the code below it. |
+| `assets/analytics.js` | GA4 + cross-site UTM passthrough (see below). Reads `gaMeasurementId` from the config block in `assets/app.js`. |
 | `assets/` (images) | Dossier portraits, author headshot, book covers, OG card. |
 
 ## Config
@@ -39,6 +40,18 @@ of [`assets/app.js`](assets/app.js):
 | `chapterOneFormAction` | The **same live Kit (ConvertKit) form** the official book site uses for "Read Chapter 1 Free" — one shared Recovery List, one incentive email. The "Send Chapter 1" form here does a real (non-fetch) POST to it, exactly like `site/assets/whb.js`'s `subscribe()`, so Kit's configured success redirect lands the reader on the book site's `check-your-email.html` — this is an intentional cross-link back to that site, not a bug. |
 | `discordUrl` / `patreonUrl` | Empty = the Reading Room shows "DOOR SEALED — OPENING SOON" (real state, not a missing link — set these once the Discord/Patreon exist) |
 | `newsletterAction` | Empty = the *Inner Circle* signup form (bottom of page, a separate list from the Chapter 1 capture) is front-end only (no POST) until a real endpoint is set |
+| `gaMeasurementId` | Same GA4 property as the book site's `GA4_MEASUREMENT_ID` in `site/assets/site.js` — keep them matching so both sites report together. |
+
+## Cross-site analytics (`assets/analytics.js`)
+
+Loads the GA4 tag above, fires a named event (`data-track` / `data-track-dest`
+attributes) when a visitor clicks through to the book site or Genius Index,
+and — mirroring the book site's own UTM passthrough in the other direction —
+tags every outbound link to `dixon8303.github.io` (both the book site and
+Genius Index live there) with whatever `utm_*` params the visitor arrived
+with, so a click that started on YouTube or Pinterest keeps its attribution
+across the whole chain: **YouTube → Black Genius Files → book site /
+Genius Index**.
 
 ## Sync & fallback chain
 
