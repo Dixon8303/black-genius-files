@@ -643,11 +643,13 @@ window.BGF_CONFIG = {
     cta.href = CFG.bookUrl || "https://payhip.com/b/exquo";
     $("book-retail").style.display = bookSt === "coming" ? "none" : "flex";
     $("book-official-site").href = CFG.whbSiteUrl;
+    $("footer-whb-link").href = CFG.whbSiteUrl;
     if (CFG.bnUrl) { $("book-bn").href = CFG.bnUrl; $("book-bn").hidden = false; }
     if (CFG.kindleUrl) { $("book-kindle").href = CFG.kindleUrl; $("book-kindle").hidden = false; }
     var gi = CFG.geniusIndexUrl;
     $("gi-cover-link").href = gi; $("gi-visit-link").href = gi; $("custodian-gi-link").href = gi; $("footer-gi-link").href = gi;
     $("gi-assessment-link").href = CFG.assessmentUrl;
+    $("footer-assessment-link").href = CFG.assessmentUrl;
     $("book-cover-link").href = CFG.bookUrl;
     $("footer-yt-link").href = YT.url;
     document.querySelectorAll("[data-yt-sub]").forEach(function (a) { a.href = YT.sub; });
