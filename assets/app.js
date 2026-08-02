@@ -57,7 +57,13 @@ window.BGF_CONFIG = {
   // Same show as the book site's PODCAST_URL (site/assets/site.js) — one
   // Apple Podcasts URL drives both the "Listen" link and the embedded
   // player (embed src is derived by swapping in embed.podcasts.apple.com).
-  podcastUrl: "https://podcasts.apple.com/us/podcast/the-all-black-everything-podcast/id1527013923"
+  podcastUrl: "https://podcasts.apple.com/us/podcast/the-all-black-everything-podcast/id1527013923",
+  // Guest-invite panel next to the podcast embed. Booking link is the
+  // actual scheduling action; the Adobe Express page is the "what the
+  // show is about / what we're looking for" pitch a prospective guest
+  // reads before booking.
+  podcastGuestBookingUrl: "https://calendly.com/eatmediatv/all-black-everything-podcast-interview",
+  podcastGuestAboutUrl: "https://express.adobe.com/page/47PKcLrxZjmyc/"
 };
 /* ========================== end of config block ============================ */
 
@@ -820,14 +826,17 @@ window.BGF_CONFIG = {
   // ---------------------------------------------------------------- Podcast
   function renderPodcast() {
     var url = (CFG.podcastUrl || "").trim();
-    if (!url) return;
-    $("podcast-link").href = url;
-    try {
-      var u = new URL(url);
-      if (u.hostname === "podcasts.apple.com") u.hostname = "embed.podcasts.apple.com";
-      u.searchParams.set("theme", "dark"); // force dark, independent of visitor OS setting — matches site theme
-      $("podcast-embed").src = u.toString();
-    } catch (e) {}
+    if (url) {
+      $("podcast-link").href = url;
+      try {
+        var u = new URL(url);
+        if (u.hostname === "podcasts.apple.com") u.hostname = "embed.podcasts.apple.com";
+        u.searchParams.set("theme", "dark"); // force dark, independent of visitor OS setting — matches site theme
+        $("podcast-embed").src = u.toString();
+      } catch (e) {}
+    }
+    if (CFG.podcastGuestBookingUrl) $("podcast-guest-book").href = CFG.podcastGuestBookingUrl;
+    if (CFG.podcastGuestAboutUrl) $("podcast-guest-about").href = CFG.podcastGuestAboutUrl;
   }
 
   // ---------------------------------------------------------------- Newsletter
