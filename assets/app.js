@@ -40,6 +40,10 @@ window.BGF_CONFIG = {
   // it still matches OUTBOUND_HOST in assets/analytics.js and picks up the
   // same cross-site UTM passthrough as geniusIndexUrl/whbSiteUrl above.
   assessmentUrl: "https://dixon8303.github.io/ImaginariumOzone/",
+  // The parent company site (ImaginariumOzone's eatmedia/ rebuild, which
+  // already cross-links back here). Not eatmediatv.com -- that domain still
+  // points at the old GoDaddy site until the DNS cutover happens.
+  eatMediaUrl: "https://dixon8303.github.io/ImaginariumOzone/eatmedia/",
   discordUrl: "",
   patreonUrl: "",
   newsletterAction: "",
@@ -660,6 +664,7 @@ window.BGF_CONFIG = {
     $("gi-cover-link").href = gi; $("gi-visit-link").href = gi; $("custodian-gi-link").href = gi; $("footer-gi-link").href = gi;
     $("gi-assessment-link").href = CFG.assessmentUrl;
     $("footer-assessment-link").href = CFG.assessmentUrl;
+    $("footer-eatmedia-link").href = CFG.eatMediaUrl;
     $("book-cover-link").href = CFG.bookUrl;
     $("footer-yt-link").href = YT.url;
     document.querySelectorAll("[data-yt-sub]").forEach(function (a) { a.href = YT.sub; });
