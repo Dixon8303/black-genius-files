@@ -40,10 +40,8 @@ window.BGF_CONFIG = {
   // it still matches OUTBOUND_HOST in assets/analytics.js and picks up the
   // same cross-site UTM passthrough as geniusIndexUrl/whbSiteUrl above.
   assessmentUrl: "https://dixon8303.github.io/ImaginariumOzone/",
-  // The parent company site (ImaginariumOzone's eatmedia/ rebuild, which
-  // already cross-links back here). Not eatmediatv.com -- that domain still
-  // points at the old GoDaddy site until the DNS cutover happens.
-  eatMediaUrl: "https://dixon8303.github.io/ImaginariumOzone/eatmedia/",
+  // The parent company site, live at eatmediatv.com.
+  eatMediaUrl: "https://eatmediatv.com/",
   discordUrl: "",
   patreonUrl: "",
   newsletterAction: "",
