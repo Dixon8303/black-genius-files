@@ -684,6 +684,7 @@ window.BGF_CONFIG = {
     var action = (CFG.chapterOneFormAction || "").trim();
     if (!action) { alert("Signup opens soon — the Recovery List isn't connected yet."); return; }
     if (!email || email.indexOf("@") < 1) { if (input) input.focus(); return; }
+    if (window.BGF_TRACK_LEAD) window.BGF_TRACK_LEAD("free_chapter");
     var f = document.createElement("form");
     f.method = "post"; f.action = action; f.style.display = "none";
     var em = document.createElement("input"); em.name = "email_address"; em.value = email;
@@ -867,6 +868,7 @@ window.BGF_CONFIG = {
         });
       } catch (err) {}
     }
+    if (window.BGF_TRACK_LEAD) window.BGF_TRACK_LEAD("inner_circle");
     state.subscribed = true;
     form.hidden = true; $("subscribe-success").hidden = false;
   });
