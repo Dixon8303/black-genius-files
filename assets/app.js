@@ -44,7 +44,12 @@ window.BGF_CONFIG = {
   eatMediaUrl: "https://eatmediatv.com/",
   discordUrl: "",
   patreonUrl: "",
-  newsletterAction: "",
+  // The "Claim My Access" capture posts to the same Kit form as the Chapter 1
+  // capture below — one shared Recovery List, so a subscriber from either
+  // entry point gets the same incentive email. The field names in #subscribe-form
+  // are Kit's own (email_address / first_name / fields[interest]); renaming them
+  // breaks delivery silently, since the submit below cannot read Kit's response.
+  newsletterAction: "https://app.kit.com/forms/9748584/subscriptions",
   // Same live Kit (ConvertKit) form the official "What History Buried" site
   // uses for its "Read Chapter 1 Free" capture — one shared Recovery List,
   // one incentive email that delivers Chapter 1. Kit's configured success
@@ -845,10 +850,23 @@ window.BGF_CONFIG = {
   // ---------------------------------------------------------------- Newsletter
   $("subscribe-form").addEventListener("submit", function (e) {
     e.preventDefault();
-    var form = e.target, em = (form.elements.email || {}).value || "";
+    var form = e.target, em = (form.elements.email_address || {}).value || "";
     if (!em.trim()) return;
     var url = (CFG.newsletterAction || "").trim();
-    if (url) { try { fetch(url, {method: "POST", mode: "no-cors", body: new FormData(form)}); } catch (err) {} }
+    // Kit's embed endpoint sends no CORS headers, so this is a no-cors POST and
+    // the response is opaque — success cannot be read back, which is why the
+    // field names above must match Kit's exactly. Sent url-encoded rather than
+    // as multipart FormData, matching what Kit's own embedded forms post.
+    if (url) {
+      try {
+        fetch(url, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"},
+          body: new URLSearchParams(new FormData(form)).toString()
+        });
+      } catch (err) {}
+    }
     state.subscribed = true;
     form.hidden = true; $("subscribe-success").hidden = false;
   });
