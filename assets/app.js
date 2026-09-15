@@ -39,7 +39,7 @@ window.BGF_CONFIG = {
   // Kept as the direct dixon8303.github.io URL, not the tinyurl alias, so
   // it still matches OUTBOUND_HOST in assets/analytics.js and picks up the
   // same cross-site UTM passthrough as geniusIndexUrl/whbSiteUrl above.
-  assessmentUrl: "https://dixon8303.github.io/ImaginariumOzone/",
+  assessmentUrl: "https://dixon8303.github.io/genius-index-booksite/assessment",
   // The parent company site, live at eatmediatv.com.
   eatMediaUrl: "https://eatmediatv.com/",
   discordUrl: "",
