@@ -27,13 +27,26 @@ window.BGF_CONFIG = {
   // there; this URL is just the no-JS fallback href.
   bookUrl: "https://payhip.com/b/exquo",
   bookPrice: "$14.99", // keep in sync with the Payhip listing
+  // Paperback is the lead format for the Sep 29 - Oct 8 launch campaign —
+  // drives the primary #book-cta button and #book-cover-link.
+  paperbackUrl: "https://www.amazon.com/dp/B0HKT1PV5Y",
+  paperbackPrice: "$36.99",
+  hardcoverUrl: "https://www.amazon.com/dp/B0HKW11PSZ",
+  hardcoverPrice: "$54.99",
+  // The Study & Trivia Companion — a separate Payhip listing from bookUrl
+  // above, same checkout-overlay pattern.
+  companionUrl: "https://payhip.com/b/R0jgn",
+  companionPrice: "$7.99",
+  // Slim top-of-page banner for the paperback launch campaign, linking to
+  // #book. Set to false once the campaign ends (after Oct 8).
+  launchRibbon: true,
   // The official book site — has the full buy flow (this same Payhip
   // listing + Amazon), the free chapter, and the evidence room. Surfaced
   // as its own "Visit the Official Site" link now that bookUrl above goes
   // straight to checkout.
   whbSiteUrl: "https://dixon8303.github.io/ImaginariumOzone/book/",
-  bnUrl: "",
-  kindleUrl: "",
+  bnUrl: "", // no verified Barnes & Noble listing — #book-bn stays hidden
+  kindleUrl: "https://www.amazon.com/dp/B0GX32RB25", // in Kindle Unlimited
   geniusIndexUrl: "https://dixon8303.github.io/genius-index-booksite/",
   // The Genius Index's own interactive online assessment (separate repo).
   // Kept as the direct dixon8303.github.io URL, not the tinyurl alias, so
@@ -653,25 +666,39 @@ window.BGF_CONFIG = {
   }
   function renderBook() {
     var bookSt = CFG.bookStatus || "available";
-    $("book-stamp").textContent = bookSt === "preorder" ? "PRE-ORDER OPEN" : bookSt === "coming" ? "COMING SOON" : "AVAILABLE NOW";
+    $("book-stamp").textContent = bookSt === "preorder" ? "PRE-ORDER OPEN" : bookSt === "coming" ? "COMING SOON" : "NOW IN PAPERBACK";
     var cta = $("book-cta");
-    var priceSuffix = CFG.bookPrice ? " — " + CFG.bookPrice : "";
-    cta.textContent = (bookSt === "preorder" ? "Pre-order the Book" : "Get the Book") + priceSuffix + " ↗";
-    cta.href = CFG.bookUrl || "https://payhip.com/b/exquo";
+    var pbPriceSuffix = CFG.paperbackPrice ? " — " + CFG.paperbackPrice : "";
+    cta.textContent = (bookSt === "preorder" ? "Pre-order the Paperback" : "Get the Paperback") + pbPriceSuffix + " ↗";
+    cta.href = CFG.paperbackUrl || "https://www.amazon.com/dp/B0HKT1PV5Y";
     $("book-retail").style.display = bookSt === "coming" ? "none" : "flex";
+    var hc = $("book-hardcover");
+    if (CFG.hardcoverUrl) {
+      hc.href = CFG.hardcoverUrl;
+      hc.textContent = "Hardcover" + (CFG.hardcoverPrice ? " — " + CFG.hardcoverPrice : "") + " ↗";
+      hc.hidden = false;
+    }
+    var pdf = $("book-pdf");
+    pdf.href = CFG.bookUrl || "https://payhip.com/b/exquo";
+    pdf.textContent = "PDF Direct" + (CFG.bookPrice ? " — " + CFG.bookPrice : "") + " ↗";
+    var comp = $("book-companion");
+    comp.href = CFG.companionUrl || "https://payhip.com/b/R0jgn";
+    comp.textContent = "Study & Trivia Companion" + (CFG.companionPrice ? " — " + CFG.companionPrice : "") + " ↗";
     $("book-official-site").href = CFG.whbSiteUrl;
     $("footer-whb-link").href = CFG.whbSiteUrl;
     if (CFG.bnUrl) { $("book-bn").href = CFG.bnUrl; $("book-bn").hidden = false; }
-    if (CFG.kindleUrl) { $("book-kindle").href = CFG.kindleUrl; $("book-kindle").hidden = false; }
+    if (CFG.kindleUrl) { $("book-kindle").href = CFG.kindleUrl; $("book-kindle").textContent = "Kindle ↗"; $("book-kindle").hidden = false; }
     var gi = CFG.geniusIndexUrl;
     $("gi-cover-link").href = gi; $("gi-visit-link").href = gi; $("custodian-gi-link").href = gi; $("footer-gi-link").href = gi;
     $("gi-assessment-link").href = CFG.assessmentUrl;
     $("footer-assessment-link").href = CFG.assessmentUrl;
     $("footer-eatmedia-link").href = CFG.eatMediaUrl;
-    $("book-cover-link").href = CFG.bookUrl;
+    $("book-cover-link").href = CFG.paperbackUrl || "https://www.amazon.com/dp/B0HKT1PV5Y";
     $("footer-yt-link").href = YT.url;
     document.querySelectorAll("[data-yt-sub]").forEach(function (a) { a.href = YT.sub; });
     renderChapters();
+    var ribbon = $("launch-ribbon");
+    if (ribbon) ribbon.hidden = (CFG.launchRibbon ?? true) === false;
   }
   // Matches the official "What History Buried" site's Chapter 1 capture exactly:
   // a real (non-fetch) form POST to Kit, so Kit's own success redirect takes the
