@@ -46,30 +46,37 @@
     }
 
     // Order matters: a subscribe link is also a youtube.com link, and the
-    // subscribe intent is the one worth counting.
-    function classify(href) {
-      if (/sub_confirmation/.test(href)) return "subscribe_click";
-      if (/payhip\.com/.test(href)) return "buy_click";
-      if (/ImaginariumOzone\/book/.test(href)) return "book_click";
-      if (/youtube\.com|youtu\.be/.test(href)) return "youtube_click";
-      if (/podcasts\.apple\.com/.test(href)) return "podcast_click";
-      if (/calendly\.com/.test(href)) return "interview_click";
-      return "outbound_click";
+    // subscribe intent is the one worth counting. Amazon links are checked
+    // first — they carry their own params (format/retailer/placement) from
+    // data-track-buy / data-placement, ahead of the generic outbound rule.
+    function eventFor(a, href) {
+      var ds = a.dataset || {};
+      if (/amazon\.com/.test(href)) return {name: "amazon_click", extra: {format: ds.trackBuy || "", retailer: "amazon", placement: ds.placement || ""}};
+      if (/sub_confirmation/.test(href)) return {name: "subscribe_click", extra: {}};
+      if (/payhip\.com/.test(href)) return {name: "buy_click", extra: {format: ds.trackBuy || ""}};
+      if (/ImaginariumOzone\/book/.test(href)) return {name: "book_click", extra: {}};
+      if (/youtube\.com|youtu\.be/.test(href)) return {name: "youtube_click", extra: {}};
+      if (/podcasts\.apple\.com/.test(href)) return {name: "podcast_click", extra: {}};
+      if (/calendly\.com/.test(href)) return {name: "interview_click", extra: {}};
+      return {name: "outbound_click", extra: {}};
     }
 
     document.addEventListener("click", function (ev) {
       var a = ev.target.closest && ev.target.closest("a[href]");
       if (!a || typeof window.gtag !== "function") return;
       if (!isOutbound(a)) return;
+      var evt = eventFor(a, a.href);
       // One event per click: the classifier replaces the old data-track
       // dispatch rather than firing alongside it. data-track-dest is kept as
       // a parameter so the hand-labelled destinations aren't lost.
-      window.gtag("event", classify(a.href), {
+      var params = {
         link_url: a.href,
         link_text: (a.innerText || "").trim().slice(0, 80),
         destination: (a.dataset && a.dataset.trackDest) || "",
         transport_type: "beacon"
-      });
+      };
+      for (var k in evt.extra) params[k] = evt.extra[k];
+      window.gtag("event", evt.name, params);
     }, true);
   }
 
