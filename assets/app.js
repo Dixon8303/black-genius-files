@@ -38,8 +38,8 @@ window.BGF_CONFIG = {
   companionUrl: "https://payhip.com/b/R0jgn",
   companionPrice: "$7.99",
   // Slim top-of-page banner for the paperback launch campaign, linking to
-  // #book. Set to false once the campaign ends (after Oct 8).
-  launchRibbon: true,
+  // #book. The Sep 29 - Oct 8 campaign has ended, so this is off.
+  launchRibbon: false,
   // The official book site — has the full buy flow (this same Payhip
   // listing + Amazon), the free chapter, and the evidence room. Surfaced
   // as its own "Visit the Official Site" link now that bookUrl above goes
